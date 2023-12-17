@@ -8,13 +8,8 @@ using namespace std;
 class Solution {
   public:
     string armstrongNumber(int n){
-        int count = 0;
+        int count = int(log10(n) + 1);
     	int temp = n;
-    	while(temp) {
-    		count++;
-    		temp /= 10;
-    	}
-    	temp = n;
     	int sum = 0;
     	while(temp) {
     		int digit = temp%10;
@@ -23,7 +18,7 @@ class Solution {
     	}
     
     	return (sum == n)? "Yes" : "No";
-        }
+    }
 };
 
 //{ Driver Code Starts.
