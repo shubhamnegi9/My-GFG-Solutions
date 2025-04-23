@@ -10,7 +10,6 @@ class Solution {
   public:
     vector<int> sieveOfEratosthenes(int n) {
         
-        vector<int> res;
         vector<bool> primes(n+1, true);
         
         for(int i = 2; i*i <= n; i++) {
@@ -21,12 +20,14 @@ class Solution {
             }
         }
         
+        vector<int> result;
         for(int i = 2; i <= n; i++) {
-            if(primes[i])
-                res.push_back(i);
+            if(primes[i]) {
+                result.push_back(i);
+            }
         }
         
-        return res;
+        return result;
     }
 };
 
