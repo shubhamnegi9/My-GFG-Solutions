@@ -9,8 +9,9 @@ using namespace std;
 
 class Solution {
   public:
-  
-    bool checkIfPalindrome(string& s, int i) {
+    // Function to check if a string is a palindrome.
+    
+    bool checkPalindrome(int i, string& s) {
         int n = s.length();
         if(i >= n/2)
             return true;
@@ -18,12 +19,11 @@ class Solution {
         if(s[i] != s[n-i-1])
             return false;
         
-        checkIfPalindrome(s, i+1);
+        return checkPalindrome(i+1, s);
     }
-  
-    // Function to check if a string is a palindrome.
+    
     bool isPalindrome(string& s) {
-        return checkIfPalindrome(s, 0);
+        return checkPalindrome(0, s);
     }
 };
 
