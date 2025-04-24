@@ -8,12 +8,18 @@ using namespace std;
 // User function Template for C++
 class Solution {
   public:
-    void printTillN(int n) {
-        if(n == 0)
+    void print1ToN(int i, int n) {
+        if(i > n)
             return;
         
-        printTillN(n-1);
-        cout << n << " ";
+        cout << i << " ";
+        print1ToN(i+1, n);
+    }
+  
+    void printTillN(int n) {
+        
+        // Approach 1
+        print1ToN(1, n);
     }
 };
 
