@@ -7,33 +7,18 @@ using namespace std;
 
 class Solution {
   public:
-    // Approach 1: Using recursion + 2 pointer
-    void reverseArrayUsing2Pointer(vector<int> &arr, int i, int j) {
-        if(i >= j) 
-            return;
-        
-        swap(arr[i], arr[j]);
-        reverseArrayUsing2Pointer(arr, i+1, j-1);
-    }
-    
-    // Approach 2: Using recursion + 1 pointer
-    void reverseArrayUsing1Pointer(vector<int> &arr, int i, int n) {
+    void reverse(vector<int>& arr, int i, int n) {
         if(i >= n/2)
             return;
         
         swap(arr[i], arr[n-i-1]);
-        reverseArrayUsing1Pointer(arr, i+1, n);
+        reverse(arr, i+1, n);
     }
-  
+    
     void reverseArray(vector<int> &arr) {
-        // Approach 1: Using recursion + 2 pointer
         int i = 0;
-        int j = arr.size()-1;
-        // reverseArrayUsing2Pointer(arr, i, j);
-        
-        
-        // Approach 2: Using recursion + 1 pointer
-        reverseArrayUsing1Pointer(arr, i, arr.size());
+        int n = arr.size();
+        reverse(arr, i, n);
     }
 };
 
