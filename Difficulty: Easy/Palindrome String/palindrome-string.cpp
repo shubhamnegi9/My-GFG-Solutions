@@ -9,14 +9,21 @@ using namespace std;
 
 class Solution {
   public:
+  
+    bool checkIfPalindrome(string& s, int i) {
+        int n = s.length();
+        if(i >= n/2)
+            return true;
+        
+        if(s[i] != s[n-i-1])
+            return false;
+        
+        checkIfPalindrome(s, i+1);
+    }
+  
     // Function to check if a string is a palindrome.
     bool isPalindrome(string& s) {
-        int n = s.length();
-        for(int i = 0; i < n/2; i++) {
-            if(s[i] != s[n-i-1])
-                return false;
-        }
-        return true;
+        return checkIfPalindrome(s, 0);
     }
 };
 
