@@ -35,7 +35,6 @@ class Solution {
                     mini = j;
                 }
             }
-            
             swap(arr[i], arr[mini]);
         }
     }
