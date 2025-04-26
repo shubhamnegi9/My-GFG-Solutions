@@ -7,16 +7,23 @@ using namespace std;
 
 class Solution {
   public:
+    void insertionSortRecursive(vector<int>& arr, int i, int n) {
+        if(i == n)
+            return;
+        
+        int j = i;
+        while(j > 0 && arr[j] < arr[j-1]) {
+            swap(arr[j], arr[j-1]);
+            j--;
+        }
+        
+        insertionSortRecursive(arr, i+1, n);
+    }
+  
     // Please change the array in-place
     void insertionSort(vector<int>& arr) {
         int n = arr.size();
-        for(int i = 0; i < n; i++) {
-            int j = i;
-            while(j > 0 && arr[j] < arr[j-1]) {
-                swap(arr[j], arr[j-1]);
-                j--;
-            }
-        }
+        insertionSortRecursive(arr, 0, n);
     }
 };
 
