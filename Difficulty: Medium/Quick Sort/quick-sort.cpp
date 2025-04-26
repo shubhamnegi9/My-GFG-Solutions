@@ -18,7 +18,7 @@ class Solution {
     void quickSort(vector<int>& arr, int low, int high) {
         if(low >= high)
             return;
-        
+            
         int pIndex = partition(arr, low, high);
         quickSort(arr, low, pIndex-1);
         quickSort(arr, pIndex+1, high);
@@ -30,20 +30,18 @@ class Solution {
     // to left of pivot and all greater elements to right of pivot.
     int partition(vector<int>& arr, int low, int high) {
         int pivot = arr[low];   // first element as pivot
-        
         int i = low, j = high;
         
         while(i < j) {
             while(arr[i] <= pivot && i <= high-1) {
                 i++;
             }
-            
             while(arr[j] > pivot && j >= low+1) {
                 j--;
             }
-            
-            if(i < j)
+            if(i < j) {
                 swap(arr[i], arr[j]);
+            }
         }
         
         swap(arr[low], arr[j]);
