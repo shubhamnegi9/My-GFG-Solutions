@@ -21,6 +21,7 @@ class Solution {
                     isSwapped = true;
                 }
             }
+            
             if(isSwapped == false)
                 break;
         }
