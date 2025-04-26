@@ -7,10 +7,11 @@ using namespace std;
 
 class Solution {
   public:
+    
     void merge(vector<int>& arr, int l, int mid, int r) {
-        vector<int> temp;
         int left = l;
         int right = mid+1;
+        vector<int> temp;
         
         while(left <= mid && right <= r) {
             if(arr[left] <= arr[right]) {
@@ -36,11 +37,11 @@ class Solution {
             arr[i] = temp[i-l];
         }
     }
-  
+    
     void mergeSort(vector<int>& arr, int l, int r) {
         if(l >= r)
             return;
-        
+            
         int mid = l + (r-l)/2;
         mergeSort(arr, l, mid);
         mergeSort(arr, mid+1, r);
