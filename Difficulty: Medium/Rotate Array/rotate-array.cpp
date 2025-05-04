@@ -9,11 +9,12 @@ using namespace std;
 
 class Solution {
   public:
-    // Brute Force 
-    // T.C. = O(d*n)
+    // Brute Force Approach
+    // T.C. = O(n*d)
     // S.C. = O(1)
     void rotateArr1(vector<int>& arr, int d, int n) {
-        d = d % n;
+        d = d%n;
+        
         while(d--) {
             int temp = arr[0];
             for(int i = 1; i < n; i++) {
@@ -24,8 +25,11 @@ class Solution {
     }
     
     // Better Approach
+    // T.C. = O(d) + O(n-d) + O(d) = O(n+d)
+    // S.C. = O(d)
     void rotateArr2(vector<int>& arr, int d, int n) {
-        d = d % n;
+        d = d%n;
+        
         vector<int> temp;
         
         for(int i = 0; i < d; i++) {
@@ -41,14 +45,29 @@ class Solution {
         }
     }
     
+    // Optimal Approach
+    // T.C. = O(d) + O(n-d) + O(n) = O(2n)
+    // S.C. = O(1)
+    void rotateArr3(vector<int>& arr, int d, int n) {
+        d = d%n;
+        
+        reverse(arr.begin(), arr.begin()+d);
+        reverse(arr.begin()+d, arr.end());
+        reverse(arr.begin(), arr.end());
+    }
+    
     // Function to rotate an array by d elements in counter-clockwise direction.
     void rotateArr(vector<int>& arr, int d) {
         int n = arr.size();
-        // Brute Force 
-        // rotateArr1(arr, d, n);
+        
+        // Brute Force Approach
+        // return rotateArr1(arr, d, n);
         
         // Better Approach
-        rotateArr2(arr, d, n);
+        // return rotateArr2(arr, d, n);
+        
+        // Optimal Approach
+        return rotateArr3(arr, d, n);
     }
 };
 
