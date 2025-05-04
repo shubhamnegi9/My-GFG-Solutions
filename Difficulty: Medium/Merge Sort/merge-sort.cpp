@@ -9,9 +9,8 @@ class Solution {
   public:
     
     void merge(vector<int>& arr, int l, int mid, int r) {
-        int left = l;
-        int right = mid+1;
         vector<int> temp;
+        int left = l, right = mid+1;
         
         while(left <= mid && right <= r) {
             if(arr[left] <= arr[right]) {
@@ -39,9 +38,9 @@ class Solution {
     }
     
     void mergeSort(vector<int>& arr, int l, int r) {
-        if(l >= r)
+        if(l >= r) {
             return;
-            
+        }
         int mid = l + (r-l)/2;
         mergeSort(arr, l, mid);
         mergeSort(arr, mid+1, r);
