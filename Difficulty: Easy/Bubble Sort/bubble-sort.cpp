@@ -10,30 +10,21 @@ using namespace std;
 
 class Solution {
   public:
-    
-    void bubbleSortRecursive(vector<int>& arr, int n) {
-        if(n == 1) {
-            return;
-        }
-        
-        bool isSwapped = false;
-        for(int j = 0; j <= n-2; j++) {
-            if(arr[j] > arr[j+1]) {
-                swap(arr[j], arr[j+1]);
-                isSwapped = true;
-            }
-        }
-        
-        if(isSwapped == false)
-            return;
-        
-        bubbleSortRecursive(arr, n-1);
-    }
-  
     // Function to sort the array using bubble sort algorithm.
     void bubbleSort(vector<int>& arr) {
         int n = arr.size();
-        bubbleSortRecursive(arr, n);
+        for(int i = n-1; i > 0; i--) {
+            bool isSwapped = false;
+            for(int j = 0; j < i; j++) {
+                if(arr[j] > arr[j+1]) {
+                    swap(arr[j], arr[j+1]);
+                    isSwapped = true;
+                }
+            }
+            if(isSwapped == false) {
+                break;
+            }
+        }
     }
 };
 
