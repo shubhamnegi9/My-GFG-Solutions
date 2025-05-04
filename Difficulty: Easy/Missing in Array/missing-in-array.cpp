@@ -10,10 +10,8 @@ class Solution {
     // Brute Force Approach
     // T.C. = O(n^2)
     // S.C. = O(1)
-    int missingNum1(vector<int>& arr) {
-        int n = arr.size();
+    int missingNum1(vector<int>& arr, int n) {
         int missing = -1;
-        
         for(int num = 1; num <= n+1; num++) {
             bool found = false;
             for(int& ele: arr) {
@@ -22,8 +20,9 @@ class Solution {
                     break;
                 }
             }
-            if(found == false)
+            if(found == false) {
                 missing = num;
+            }
         }
         
         return missing;
@@ -32,19 +31,17 @@ class Solution {
     // Better Approach
     // T.C. = O(n) + O(n)
     // S.C. = O(n)
-    int missingNum2(vector<int>& arr) {
-        int n = arr.size();
-        unordered_map<int, int> mpp;
+    int missingNum2(vector<int>& arr, int n) {
         int missing = -1;
+        unordered_map<int, int> mpp;
         
         for(int& ele: arr) {
             mpp[ele]++;
         }
         
-        for(int i = 1; i <= n+1; i++) {
-            if(mpp[i] == 0) {
-                missing = i;
-                break;
+        for(int num = 1; num <= n+1; num++) {
+            if(mpp[num] == 0) {
+                missing = num;
             }
         }
         
@@ -54,24 +51,22 @@ class Solution {
     // Optimal Approach using sum
     // T.C. = O(n)
     // S.C. = O(1)
-    int missingNum3(vector<int>& arr) {
-        int n = arr.size();
-        
-        int sum = ((n+1)*(n+2))/2;
-        
+    int missingNum3(vector<int>& arr, int n) {
+        int N = n+1;
+        int sum = (N*(N+1))/2;
         int sum2 = 0;
+        
         for(int& ele: arr) {
-            sum2 += ele;
+            sum2+= ele;
         }
         
-        return sum - sum2;
+        return sum-sum2;
     }
     
     // Optimal Approach using XOR
     // T.C. = O(n)
     // S.C. = O(1)
-    int missingNum4(vector<int>& arr) {
-        int n = arr.size();
+    int missingNum4(vector<int>& arr, int n) {
         int XOR = 0;
         
         for(int i = 0; i < n; i++) {
@@ -80,21 +75,23 @@ class Solution {
         }
         XOR ^= n+1;
         
+        
         return XOR;
     }
     
     int missingNum(vector<int>& arr) {
+        int n = arr.size();
         // Brute Force Approach
-        // return missingNum1(arr);
+        // return missingNum1(arr, n);
         
         // Better Approach
-        // return missingNum2(arr);
+        // return missingNum2(arr, n);
         
         // Optimal Approach using sum
-        // return missingNum3(arr);
+        // return missingNum3(arr, n);
         
         // Optimal Approach using XOR
-        return missingNum4(arr);
+        return missingNum4(arr, n);
     }
 };
 
