@@ -11,30 +11,35 @@ using namespace std;
 
 class Solution {
   public:
-    // Brute Force Approach
-    // T.C. = O(nlogn) + O(n)
-    // S.C. = O(n)
-    int removeDuplicates1(vector<int>& arr) {
-        set<int> st;
-        for(int& ele: arr) {
-            st.insert(ele);
-        }
+    // Brute Force
+    // T.C. = O(nlogn)
+    // S.C. = O(1)
+    int removeDuplicates1(vector<int> &arr) {
+        set<int> s(arr.begin(), arr.end());
         
-        int i = 0;
-        for(auto ele: st) {
-            arr[i] = ele;
-            i++;
-        }
-        
-        return st.size();
+        return s.size();
     }
     
-    // Optimal Approach 
+    // Better Approach
+    // T.C. = O(n)
+    // S.C. = O(n)
+    int removeDuplicates2(vector<int> &arr) {
+        unordered_map<int, int> mpp;
+        
+        for(int& ele: arr) {
+            mpp[ele]++;
+        }
+        
+        return mpp.size();
+    }
+    
+    // Optimal Approach
     // T.C. = O(n)
     // S.C. = O(1)
-    int removeDuplicates2(vector<int>& arr) {
+    int removeDuplicates3(vector<int> &arr) {
         int n = arr.size();
         int i = 0;
+        
         for(int j = 1; j < n; j++) {
             if(arr[j] != arr[i]) {
                 arr[i+1] = arr[j];
@@ -45,13 +50,16 @@ class Solution {
         return i+1;
     }
     
+    
     int removeDuplicates(vector<int> &arr) {
-        // Brute Force Approach
+        // Brute Force
         // return removeDuplicates1(arr);
         
-        // Optimal Approach 
-        return removeDuplicates2(arr);
-         
+        // Better Approach
+        // return removeDuplicates2(arr);
+        
+        // Optimal Approach
+        return removeDuplicates3(arr);
     }
 };
 
