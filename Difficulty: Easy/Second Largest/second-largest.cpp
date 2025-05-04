@@ -8,44 +8,46 @@ using namespace std;
 
 class Solution {
   public:
-    
     // Brute Force Approach
     // T.C. = O(nlogn) + O(n)
     // S.C. = O(1)
     int getSecondLargest1(vector<int> &arr) {
         sort(arr.begin(), arr.end());
         
+        int largest = arr.back();
+        int secondLargest = -1;
         int n = arr.size();
-        int largest = arr[n-1];
-        int sLargest = -1;
-        for(int i = n-2; i >= 0; i--) {
+        for(int i = n-2; i>= 0; i--) {
             if(arr[i] != largest) {
-                sLargest = arr[i];
+                secondLargest = arr[i];
                 break;
             }
         }
         
-        return sLargest;
+        return secondLargest;
     }
     
     // Better Approach
-    // T.C. = O(n) + O(n)
+    // T.C. = O(2n)
     // S.C. = O(1)
     int getSecondLargest2(vector<int> &arr) {
         int n = arr.size();
         int largest = arr[0];
-        int sLargest = -1;
-        for(int i = 0; i < n; i++) {
-            if(arr[i] > largest)
-                largest = arr[i];
+        
+        for(int& num: arr) {
+            if(num > largest) {
+                largest = num;
+            }
         }
         
+        int secLargest = -1;
         for(int i = 0; i < n; i++) {
-            if(arr[i] > sLargest && arr[i] != largest)
-                sLargest = arr[i];
+            if(arr[i] > secLargest && arr[i] != largest) {
+                secLargest = arr[i];
+            }
         }
         
-        return sLargest;
+        return secLargest;
     }
     
     // Optimal Approach
@@ -54,22 +56,22 @@ class Solution {
     int getSecondLargest3(vector<int> &arr) {
         int n = arr.size();
         int largest = arr[0];
-        int sLargest = -1;
+        int secLargest = -1;
         
         for(int i = 0; i < n; i++) {
             if(arr[i] > largest) {
-                sLargest = largest;
+                secLargest = largest;
                 largest = arr[i];
-            } else if(arr[i] != largest && arr[i] > sLargest) {
-                sLargest = arr[i];
+            } else if(arr[i] > secLargest && arr[i] != largest) {
+                secLargest = arr[i];
             }
         }
         
-        return sLargest;
+        return secLargest;
     }
     
     int getSecondLargest(vector<int> &arr) {
-        // Brute Force Approach
+        // Brute Force
         // return getSecondLargest1(arr);
         
         // Better Approach
