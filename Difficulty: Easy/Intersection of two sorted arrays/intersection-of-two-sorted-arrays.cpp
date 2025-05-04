@@ -11,24 +11,26 @@ class Solution {
   public:
     // Function to return a list containing the intersection of two arrays.
     vector<int> intersection(vector<int> &arr1, vector<int> &arr2) {
-        int i = 0, j = 0, m = arr1.size(), n = arr2.size();
-        vector<int> result;
+        vector<int> temp;
+        
+        int m = arr1.size(), n = arr2.size();
+        int i = 0, j = 0;
         
         while(i < m && j < n) {
-            if(arr1[i] < arr2[j]) {
-                i++;
-            } else if(arr2[j] < arr1[i]) {
-                j++;
-            } else {
-                if(result.size() == 0 || result.back() != arr1[i]) {
-                    result.push_back(arr1[i]);
+            if(arr1[i] == arr2[j]) {
+                if(temp.empty() || temp.back() != arr1[i]) {
+                    temp.push_back(arr1[i]);
                 }
                 i++;
+                j++;
+            } else if(arr1[i] < arr2[j]) {
+                i++;
+            } else {
                 j++;
             }
         }
         
-        return result;
+        return temp;
     }
 };
 
