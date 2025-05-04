@@ -10,20 +10,37 @@ using namespace std;
 class Solution {
   public:
     // Brute Force Approach
-    bool arraySortedOrNot1(vector<int>& arr) {
-        int n = arr.size();
-        for(int i = 0; i < n; i++) {
-            for(int j = i+1; j < n; j++) {
-                if(arr[j] < arr[i])
-                    return false;
-            }
+    // T.C. = O(nlogn)
+    // S.C. = O(1)
+    bool arraySorted1(vector<int>& arr, int n) {
+        vector<int> sortedArr = arr;
+        
+        sort(sortedArr.begin(), sortedArr.end());
+        
+        return sortedArr == arr;
+    }
+    
+    // Optimal Approach
+    // T.C. = O(n)
+    // S.C. = O(1)
+    bool arraySorted2(vector<int>& arr, int n) {
+
+        for(int i = 0; i < n-1; i++) {
+            if(arr[i] > arr[i+1])
+                return false;
         }
+        
         return true;
     }
     
     bool arraySortedOrNot(vector<int>& arr) {
+        int n = arr.size();
+        
         // Brute Force Approach
-        return arraySortedOrNot1(arr);
+        // return arraySorted1(arr, n);
+        
+        // Optimal Approach
+        return arraySorted2(arr, n);
     }
 };
 
