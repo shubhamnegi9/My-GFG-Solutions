@@ -8,18 +8,16 @@ using namespace std;
 // User function template for C++
 class Solution {
   public:
-    
     // Brute Force Approach
     // T.C. = O(n) + O(x) + O(n-x) = O(2n)
-    // S.C. = O(x) = O(n)
+    // S.C. = O(x)
     void pushZerosToEnd1(vector<int>& arr) {
         int n = arr.size();
-        
         vector<int> temp;
-        for(int i = 0; i < n; i++) {
-            if(arr[i] != 0) {
-                temp.push_back(arr[i]);
-            }
+        
+        for(int& ele: arr) {
+            if(ele != 0)
+                temp.push_back(ele);
         }
         
         int nz = temp.size();
@@ -37,17 +35,16 @@ class Solution {
     // S.C. = O(1)
     void pushZerosToEnd2(vector<int>& arr) {
         int n = arr.size();
-        
         int i = -1;
         for(int j = 0; j < n; j++) {
             if(arr[j] == 0) {
                 i = j;
                 break;
             }
-        } 
+        }
         
         if(i == -1)
-            return;     // No zero elements in array
+            return;
         
         for(int j = i+1; j < n; j++) {
             if(arr[j] != 0) {
@@ -55,14 +52,15 @@ class Solution {
                 i++;
             }
         }
+        
     }
     
     void pushZerosToEnd(vector<int>& arr) {
-        // Brute Force Approach
-        // return pushZerosToEnd1(arr);
-        
-        // Optimal Approach
-        return pushZerosToEnd2(arr);
+         // Brute Force Approach
+        //  return pushZerosToEnd1(arr);
+         
+         // Optimal Approach
+         return pushZerosToEnd2(arr);
     }
 };
 
