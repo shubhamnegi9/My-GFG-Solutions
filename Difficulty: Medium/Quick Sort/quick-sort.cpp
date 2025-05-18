@@ -15,11 +15,13 @@ void printArray(const vector<int>& arr) {
 class Solution {
   public:
     // Function to sort an array using quick sort algorithm.
+    // T.C. = O(nlogn) in best case, O(n^2) in worst case
+    // S.C. = O(1)
     void quickSort(vector<int>& arr, int low, int high) {
-        if(low >= high) {
+        // Base case
+        if(low >= high)
             return;
-        }
-        
+            
         int pIndex = partition(arr, low, high);
         quickSort(arr, low, pIndex-1);
         quickSort(arr, pIndex+1, high);
@@ -30,11 +32,11 @@ class Solution {
     // its correct position in sorted array, and places all smaller elements
     // to left of pivot and all greater elements to right of pivot.
     int partition(vector<int>& arr, int low, int high) {
-        int pivot = arr[low];   // First element as pivot
-        
+        int pivot = arr[low];   // first element as pivot
         int i = low, j = high;
         
         while(i < j) {
+            
             while(arr[i] <= pivot && i <= high-1) {
                 i++;
             }
@@ -43,12 +45,11 @@ class Solution {
                 j--;
             }
             
-            if(i < j) {
+            if(i < j)
                 swap(arr[i], arr[j]);
-            }
         }
         
-        swap(arr[j], arr[low]);
+        swap(arr[low], arr[j]);
         return j;
     }
 };
