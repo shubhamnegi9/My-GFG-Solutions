@@ -12,29 +12,29 @@ class Solution {
     // Brute Force Approach
     // T.C. = O(n*d)
     // S.C. = O(1)
-    void rotateArr1(vector<int>& arr, int d, int n) {
+    void rotateArr1(vector<int>& arr, int d, int n ) {
         d = d%n;
         
-        while(d--) {
+        while(d) {
             int temp = arr[0];
-            for(int i = 1; i < n; i++) {
-                arr[i-1] = arr[i];
+            for(int i = 0; i < n; i++) {
+                arr[i] = arr[i+1];
             }
             arr[n-1] = temp;
+            d--;
         }
     }
     
-    // Better Approach
+    // Optimal Approach
     // T.C. = O(d) + O(n-d) + O(d) = O(n+d)
-    // S.C. = O(d)
-    void rotateArr2(vector<int>& arr, int d, int n) {
-        d = d%n;
-        
+    // S.C. = O(d) for temp vector
+    void rotateArr2(vector<int>& arr, int d, int n ) {
         vector<int> temp;
+        d = d%n;
         
         for(int i = 0; i < d; i++) {
             temp.push_back(arr[i]);
-        }
+        } 
         
         for(int i = d; i < n; i++) {
             arr[i-d] = arr[i];
@@ -45,15 +45,10 @@ class Solution {
         }
     }
     
-    // Optimal Approach
-    // T.C. = O(d) + O(n-d) + O(n) = O(2n)
-    // S.C. = O(1)
-    void rotateArr3(vector<int>& arr, int d, int n) {
-        d = d%n;
+    // Using rotate STL
+    void rotateArr3(vector<int>& arr, int d, int n ) {
+        rotate(arr.begin(), arr.begin()+d, arr.end());
         
-        reverse(arr.begin(), arr.begin()+d);
-        reverse(arr.begin()+d, arr.end());
-        reverse(arr.begin(), arr.end());
     }
     
     // Function to rotate an array by d elements in counter-clockwise direction.
@@ -63,11 +58,11 @@ class Solution {
         // Brute Force Approach
         // return rotateArr1(arr, d, n);
         
-        // Better Approach
-        // return rotateArr2(arr, d, n);
-        
         // Optimal Approach
-        return rotateArr3(arr, d, n);
+        return rotateArr2(arr, d, n);
+        
+        // Using rotate STL
+        // return rotateArr3(arr, d, n);
     }
 };
 
