@@ -20,17 +20,14 @@ class Solution {
         sort(arr.begin(), arr.end());
         return arr.back();
     }
-  
-    // Optimal Approach
-    // T.C. = O(n)
-    // S.C. = O(1)
+    
     int largest2(vector<int> &arr) {
-        int maxEle = arr[0];
-        for(int& num: arr) {
-            if(num > maxEle) {
-                maxEle = num;
-            }
+        int n = arr.size();
+        int maxEle = -1;
+        for(int i = 0; i < n; i++) {
+            maxEle = max(maxEle, arr[i]);
         }
+        
         return maxEle;
     }
     
