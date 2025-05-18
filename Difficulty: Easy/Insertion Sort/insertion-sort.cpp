@@ -8,17 +8,21 @@ using namespace std;
 class Solution {
   public:
     // Please change the array in-place
-    // T.C. = O(n^2) in worse case, O(n) in best case
+    void recursiveInsertionSort(vector<int>& arr, int i, int n) {
+        if(i == n)
+            return;
+        
+        int j = i;
+        while(j > 0 && arr[j] < arr[j-1]) {
+            swap(arr[j], arr[j-1]);
+            j--;
+        }
+        recursiveInsertionSort(arr, i+1, n);
+    }
+    
     void insertionSort(vector<int>& arr) {
         int n = arr.size();
-        
-        for(int i = 0; i < n; i++) {
-            int j = i;
-            while(j > 0 && arr[j] < arr[j-1]) {
-                swap(arr[j], arr[j-1]);
-                j--;
-            }
-        }
+        recursiveInsertionSort(arr, 0, n);
     }
 };
 
