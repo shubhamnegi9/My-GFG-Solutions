@@ -7,26 +7,18 @@ using namespace std;
 
 class Solution {
   public:
-    
-    void recursiveInsertionSort(vector<int>& arr, int i) {
+    // Please change the array in-place
+    // T.C. = O(n^2) in worse case, O(n) in best case
+    void insertionSort(vector<int>& arr) {
         int n = arr.size();
         
-        if(i >= n)
-            return;
-        
-        int j = i;
-        
-        while(j > 0 && arr[j] < arr[j-1]) {
-            swap(arr[j], arr[j-1]);
-            j--;
+        for(int i = 0; i < n; i++) {
+            int j = i;
+            while(j > 0 && arr[j] < arr[j-1]) {
+                swap(arr[j], arr[j-1]);
+                j--;
+            }
         }
-        
-        recursiveInsertionSort(arr, i+1);
-    }
-  
-    // Please change the array in-place
-    void insertionSort(vector<int>& arr) {
-        recursiveInsertionSort(arr, 0);
     }
 };
 
