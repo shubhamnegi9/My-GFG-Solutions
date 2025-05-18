@@ -7,10 +7,9 @@ using namespace std;
 
 class Solution {
   public:
-    
     void merge(vector<int>& arr, int l, int mid, int r) {
-        vector<int> temp;
         int left = l, right = mid+1;
+        vector<int> temp;
         
         while(left <= mid && right <= r) {
             if(arr[left] <= arr[right]) {
@@ -20,12 +19,14 @@ class Solution {
                 temp.push_back(arr[right]);
                 right++;
             }
-        }
+        } 
+        
         
         while(left <= mid) {
             temp.push_back(arr[left]);
             left++;
         }
+        
         
         while(right <= r) {
             temp.push_back(arr[right]);
@@ -37,11 +38,14 @@ class Solution {
         }
     }
     
+    // T.C. = O(nlogn)
+    // S.C. = O(n) for temp vector
     void mergeSort(vector<int>& arr, int l, int r) {
-        if(l >= r) {
+        // base case
+        if(l >= r) 
             return;
-        }
-        int mid = l + (r-l)/2;
+        
+        int mid = l+(r-l)/2;
         mergeSort(arr, l, mid);
         mergeSort(arr, mid+1, r);
         merge(arr, l, mid, r);
