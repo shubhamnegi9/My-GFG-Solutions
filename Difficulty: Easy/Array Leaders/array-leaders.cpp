@@ -10,47 +10,51 @@ using namespace std;
 class Solution {
     // Function to find the leaders in the array.
   public:
+    
     // Brute Force Approach
     // T.C. = O(n^2)
-    // S.C. = O(n) for storing result
+    // S.C. = O(n) for returning result
     vector<int> leaders1(vector<int>& arr, int n) {
         vector<int> result;
-        for(int i = 0; i < n-1; i++) {
-            bool isLeader = true;
+        
+        for(int i = 0; i < n; i++) {
+            int leader = arr[i];
             for(int j = i+1; j < n; j++) {
                 if(arr[j] > arr[i]) {
-                    isLeader = false;
+                    leader = -1;
                     break;
                 }
-            }
-            if(isLeader) {
-                result.push_back(arr[i]);
-            }
+            }    
+            if(leader != -1)
+                result.push_back(leader);
         }
-        result.push_back(arr[n-1]);     // Last element is always a leader
+        
         return result;
     }
     
     // Optimal Approach
-    // T.C. = O(n) + O(n) for reverse function
-    // S.C. = O(n) for storing result
+    // T.C. = O(n) + O(n)
+    // S.C. = O(n) for returning result
     vector<int> leaders2(vector<int>& arr, int n) {
         vector<int> result;
-        int maxEle = INT_MIN;
+        result.push_back(arr[n-1]);
+        int maxEle = arr[n-1];
         
-        for(int i = n-1; i >= 0; i--) {
+        for(int i = n-2; i >= 0; i--) {
             if(arr[i] >= maxEle) {
                 result.push_back(arr[i]);
-                maxEle = arr[i];
             }
+            maxEle = max(maxEle, arr[i]);
         }
         
-        reverse(result.begin(), result.end());  // For printing in same order in which they appear
+        reverse(result.begin(), result.end());
+        
         return result;
     }
     
     vector<int> leaders(vector<int>& arr) {
         int n = arr.size();
+        
         // Brute Force Approach
         // return leaders1(arr, n);
         
