@@ -1,45 +1,42 @@
-//{ Driver Code Starts
-// Initial Template for C++
-#include <bits/stdc++.h>
-using namespace std;
-
-// } Driver Code Ends
-
 class Solution {
   public:
-    void print_divisors(int n) {
-        vector<int> divisors;
+    // Brute Force Approach
+    // T.C. = O(n)
+    // S.C. = O(1)
+    void print_divisors1(int n) {
+        for(int i = 1; i <= n; i++) {
+            if(n % i == 0)
+                cout << i << " ";
+        }
+        cout << endl;
+    }
+    
+    // Optimal Approach
+    // T.C. = O(sqrt(n)) + O(mlogm). m = no. of divisors
+    // S.C. = O(1) for solving problem, O(m) for returning answer
+    void print_divisors2(int n) {
+        vector<int> arr;
         for(int i = 1; i*i <= n; i++) {
             if(n % i == 0) {
-                divisors.push_back(i);
-                if(n/i != i) {
-                    divisors.push_back(n/i);
-                }
+                arr.push_back(i);
+                
+                if((n/i) != i)
+                    arr.push_back(n/i);
             }
         }
         
-        sort(divisors.begin(), divisors.end());
+        sort(arr.begin(), arr.end());
         
-        for(int div: divisors) {
-            cout << div << " ";
+        for(int& num: arr) {
+            cout << num << " ";
         }
     }
-};
-
-
-//{ Driver Code Starts.
-int main() {
-    int T;
-    cin >> T;
-    while (T--) {
-        int n;
-        cin >> n;
-        Solution ob;
-        ob.print_divisors(n);
-        cout << endl;
     
-cout << "~" << "\n";
-}
-    return 0;
-}
-// } Driver Code Ends
+    void print_divisors(int n) {
+        // Brute Force Approach
+        // print_divisors1(n);
+        
+        // Optimal Approach
+        print_divisors2(n);
+    }
+};
