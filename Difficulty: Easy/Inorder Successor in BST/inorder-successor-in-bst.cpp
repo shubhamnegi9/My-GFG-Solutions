@@ -32,9 +32,12 @@ class Solution {
         while(l <= r) {
             int mid = l+(r-l)/2;
             if(ans[mid] == x) {
-                return ans[mid+1];      // Returning element after ans[mid]
+                if(mid+1 <= ans.size()-1)
+                    return ans[mid+1];      // Returning element after ans[mid]
+                else
+                    return -1;
             }
-            else if(ans[mid] <= x) {
+            else if(ans[mid] < x) {
                 l = mid+1;
             }
             else {
@@ -55,18 +58,19 @@ class Solution {
         return findUsingBS(ans, x->data);
     }
     
-    void inorder(Node* root, Node *x, int& ans) {
-        if(root == NULL)
+    void inorder(Node* root, Node *x, int& ans, bool& found) {
+        if(found || root == NULL)
             return;
         
-        inorder(root->left, x, ans);
+        inorder(root->left, x, ans, found);
         
-        if(root->data > x->data) {
+        if(!found && root->data > x->data) {
             ans = root->data;
+            found = true;
             return;
         }
         
-        inorder(root->right, x, ans);
+        inorder(root->right, x, ans, found);
     }
     
     // Better Approach
@@ -74,7 +78,8 @@ class Solution {
     // S.C. = O(1) extra space
     int inOrderSuccessor2(Node *root, Node *x) {
         int ans = -1;
-        inorder(root, x, ans);
+        bool found = false;
+        inorder(root, x, ans, found);
         return ans;
     }
     
@@ -104,9 +109,9 @@ class Solution {
         // return inOrderSuccessor1(root, x);
         
         // Better Approach
-        // return inOrderSuccessor2(root, x);
+        return inOrderSuccessor2(root, x);
         
         // Optimal Approach
-        return inOrderSuccessor3(root, x);
+        // return inOrderSuccessor3(root, x);
     }
 };
