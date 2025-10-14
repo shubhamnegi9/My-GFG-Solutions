@@ -1,16 +1,3 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <vector>
-using namespace std;
-
-
-// } Driver Code Ends
-
-// User function Template for C++
-
 class Solution {
   public:
     // Brute Force Approach
@@ -21,51 +8,26 @@ class Solution {
         return arr.back();
     }
     
+    // Optimal Approach
+    // T.C. = O(n)
+    // S.C. = o(1)
     int largest2(vector<int> &arr) {
-        int n = arr.size();
-        int maxEle = -1;
-        for(int i = 0; i < n; i++) {
-            maxEle = max(maxEle, arr[i]);
+        int ans = arr[0];
+        for(int &num: arr) {
+            if(num > ans) {
+                ans = num;
+            }
         }
         
-        return maxEle;
+        return ans;
     }
     
     int largest(vector<int> &arr) {
         // Brute Force Approach
         // return largest1(arr);
         
+        
         // Optimal Approach
         return largest2(arr);
     }
 };
-
-
-
-//{ Driver Code Starts.
-
-int main() {
-
-    int t;
-    cin >> t;
-    cin.ignore();
-
-    while (t--) {
-        string input;
-        int num;
-        vector<int> arr;
-
-        getline(cin, input);
-        stringstream s2(input);
-        while (s2 >> num) {
-            arr.push_back(num);
-        }
-
-        Solution ob;
-        cout << ob.largest(arr) << endl;
-        cout << "~" << endl;
-    }
-    return 0;
-}
-
-// } Driver Code Ends
