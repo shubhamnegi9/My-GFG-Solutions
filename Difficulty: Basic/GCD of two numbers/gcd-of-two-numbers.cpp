@@ -1,14 +1,7 @@
-//{ Driver Code Starts
-#include<bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-
-
 class Solution {
   public:
     int gcd(int a, int b) {
+        int gcd = 1;
         while(a > 0 && b > 0) {
             if(a > b) 
                 a = a % b;
@@ -16,37 +9,11 @@ class Solution {
                 b = b % a;
         }
         
-        if(a == 0)
-            return b;
-        else
-            return a;
+        if(a == 0) 
+            gcd = b;
+        else if(b == 0)
+            gcd = a;
+        
+        return gcd;
     }
 };
-
-
-
-//{ Driver Code Starts.
-
-int main(){
-    int t;
-    scanf("%d ",&t);
-    while(t--){
-        
-        int a;
-        scanf("%d",&a);
-        
-        
-        int b;
-        scanf("%d",&b);
-        
-        Solution obj;
-        int res = obj.gcd(a, b);
-        
-        cout<<res<<endl;
-        
-    
-cout << "~" << "\n";
-}
-}
-
-// } Driver Code Ends
