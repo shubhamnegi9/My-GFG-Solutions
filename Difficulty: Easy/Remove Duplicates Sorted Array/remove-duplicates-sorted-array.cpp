@@ -1,80 +1,32 @@
-//{ Driver Code Starts
-// Initial template for C++
-
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-
-// User function template for C++
-
 class Solution {
   public:
-    // Brute Force Approach
-    // T.C. = O(n) for inseting in set + O(n) for copying from set to arr
-    // S.C. = O(n) for set
-    int removeDuplicates1(vector<int> &arr) {
+    // Approach using set
+    vector<int> removeDuplicates1(vector<int> &arr) {
         set<int> st(arr.begin(), arr.end());
+        vector<int> ans(st.begin(), st.end());
         
-        int index = 0;
-        for(auto it: st) {
-            arr[index] = it;
-            index++;
-        }
-        
-        return index;
+        return ans;
     }
     
-    // Optimal Approach
-    // T.C. = O(n)
-    // S.C. = O(1)
-    int removeDuplicates2(vector<int> &arr) {
-        int n = arr.size();
-        int i = 0;
+    // Approach without using set
+    vector<int> removeDuplicates2(vector<int> &arr) {
+        int prev = -1;
+        vector<int> ans;
         
-        for(int j = 0; j < n; j++) {
-            if(arr[j] != arr[i]) {
-                arr[i+1] = arr[j];
-                i++;
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr[i] != prev) {
+                prev = arr[i];
+                ans.push_back(arr[i]);
             }
         }
         
-        return i+1;
+        return ans;
     }
     
-    int removeDuplicates(vector<int> &arr) {
-        // Brute Force Approach
+    // Function to remove duplicates from the given array.
+    vector<int> removeDuplicates(vector<int> &arr) {
         // return removeDuplicates1(arr);
         
-        // Optimal Approach
         return removeDuplicates2(arr);
     }
 };
-
-
-//{ Driver Code Starts.
-int main() {
-    int t;
-    cin >> t;
-    cin.ignore();
-    while (t--) {
-        vector<int> arr;
-        string input;
-        getline(cin, input);
-        stringstream ss(input);
-        int number;
-        while (ss >> number) {
-            arr.push_back(number);
-        }
-        Solution ob;
-        int ans = ob.removeDuplicates(arr);
-        for (int i = 0; i < ans; i++) {
-            cout << arr[i] << " ";
-        }
-        cout << endl;
-        cout << "~" << endl;
-    }
-    return 0;
-}
-// } Driver Code Ends
